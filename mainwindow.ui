@@ -44,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -53,14 +53,53 @@
     </property>
     <addaction name="localCodeAction"/>
     <addaction name="separator"/>
+    <addaction name="action_2"/>
+    <addaction name="separator"/>
+    <addaction name="action_4"/>
+    <addaction name="separator"/>
     <addaction name="zavodAction"/>
     <addaction name="separator"/>
     <addaction name="vidVSAction"/>
+    <addaction name="separator"/>
+    <addaction name="action_6"/>
+    <addaction name="separator"/>
+    <addaction name="action_8"/>
+    <addaction name="separator"/>
+    <addaction name="action_9"/>
+    <addaction name="separator"/>
+    <addaction name="action_12"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>Функциональные задачи</string>
     </property>
+    <widget class="QMenu" name="menu_5">
+     <property name="title">
+      <string>Учёт движения СБ</string>
+     </property>
+     <addaction name="action_22"/>
+     <addaction name="separator"/>
+     <addaction name="action_24"/>
+     <addaction name="separator"/>
+     <addaction name="action_27"/>
+     <addaction name="separator"/>
+     <addaction name="action_29"/>
+     <addaction name="separator"/>
+     <addaction name="action_30"/>
+     <addaction name="separator"/>
+     <addaction name="action_32"/>
+    </widget>
+    <addaction name="menu_5"/>
+    <addaction name="separator"/>
+    <addaction name="action_13"/>
+    <addaction name="separator"/>
+    <addaction name="action_15"/>
+    <addaction name="separator"/>
+    <addaction name="action_17"/>
+    <addaction name="separator"/>
+    <addaction name="action_19"/>
+    <addaction name="separator"/>
+    <addaction name="action_21"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -91,6 +130,91 @@
   <action name="vidVSAction">
    <property name="text">
     <string>По видам ВС</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>По наименованию</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>По чертежному индексу</string>
+   </property>
+  </action>
+  <action name="action_6">
+   <property name="text">
+    <string>По заводу изготовителю</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>По СТ, снятой с вооружения</string>
+   </property>
+  </action>
+  <action name="action_9">
+   <property name="text">
+    <string>По СТ, содержащей драгметаллы</string>
+   </property>
+  </action>
+  <action name="action_12">
+   <property name="text">
+    <string>По использованию СТ после списания</string>
+   </property>
+  </action>
+  <action name="action_13">
+   <property name="text">
+    <string>Справочная информация о СТ</string>
+   </property>
+  </action>
+  <action name="action_15">
+   <property name="text">
+    <string>Инвентаризация СТ</string>
+   </property>
+  </action>
+  <action name="action_17">
+   <property name="text">
+    <string>Формирование и печать отчетных документов</string>
+   </property>
+  </action>
+  <action name="action_19">
+   <property name="text">
+    <string>Переиндексация БД</string>
+   </property>
+  </action>
+  <action name="action_21">
+   <property name="text">
+    <string>Восстановление файла БД</string>
+   </property>
+  </action>
+  <action name="action_22">
+   <property name="text">
+    <string>Учет получения СТ</string>
+   </property>
+  </action>
+  <action name="action_24">
+   <property name="text">
+    <string>Учет отправки СТ</string>
+   </property>
+  </action>
+  <action name="action_27">
+   <property name="text">
+    <string>Учет передачи СТ</string>
+   </property>
+  </action>
+  <action name="action_29">
+   <property name="text">
+    <string>Учет изменения качественного состояния СТ</string>
+   </property>
+  </action>
+  <action name="action_30">
+   <property name="text">
+    <string>Изменение ШС списанной СТ</string>
+   </property>
+  </action>
+  <action name="action_32">
+   <property name="text">
+    <string>Учет перемещения на новое место хранения</string>
    </property>
   </action>
  </widget>
