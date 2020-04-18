@@ -44,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -58,8 +58,6 @@
     <addaction name="action_4"/>
     <addaction name="separator"/>
     <addaction name="zavodAction"/>
-    <addaction name="separator"/>
-    <addaction name="vidVSAction"/>
     <addaction name="separator"/>
     <addaction name="action_6"/>
     <addaction name="separator"/>
@@ -96,10 +94,6 @@
     <addaction name="action_15"/>
     <addaction name="separator"/>
     <addaction name="action_17"/>
-    <addaction name="separator"/>
-    <addaction name="action_19"/>
-    <addaction name="separator"/>
-    <addaction name="action_21"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
