@@ -48,7 +48,8 @@ void MainWindow::fillTable()
 
 void MainWindow::on_localCodeAction_triggered()
 {
-    ui->statusbar->showMessage("Сортировка по локальному коду");
+    ui->statusbar->showMessage("Найти по локальному коду");
+    ui->label->setText("Введите локальный код");
 }
 
 void MainWindow::on_zavodAction_triggered()
@@ -59,4 +60,19 @@ void MainWindow::on_zavodAction_triggered()
 void MainWindow::on_vidVSAction_triggered()
 {
     ui->statusbar->showMessage("Сортировка по виду вооруженных сил");
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    if(ui->label->text() == "Введите локальный код")
+    {
+        QString ch = "\"";
+        QString str = "SELECT * FROM Z16 WHERE lokkod = " + ch + ui->lineEdit->text() + ch;
+        QSqlQueryModel *model = new QSqlQueryModel;
+        bool b = sqlQuery.exec(str);
+        qDebug() << b << endl << str;
+        model->setQuery(sqlQuery);
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+    }
 }
