@@ -9,11 +9,13 @@
 #include "xlsxdatavalidation.h"
 #include "QStandardItemModel"
 #include "QStandardItem"
+#include "dialog.h"
+#include <QMessageBox>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-struct st;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT  
@@ -21,16 +23,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    struct st
-    {
-        QString lokKod, index, name, zavod, edIzmer, osnovanie;
-        int count, GCX, HCX;
-        double aurum = 0.0, argentum = 0.0, platina = 0.0, platinaGroup = 0.0;
-        bool lose = false, metalls = false;
-    };
+
     QStandardItemModel *allDataModel, *loseModel, *metallsModel;
 
-    QVector <st> data;
+    QVector <Dialog::st> data;
+
+    Dialog::st findLokKod(QString key);   //Поиск по локальному коду
+    Dialog::st findName(QString key);     //Поиск по наименованию
+    Dialog::st findIndex(QString key);    //Поиск по чертежному индексу
     //QXlsx::Document z16;
 private slots:
     void on_localCodeAction_triggered();
@@ -49,7 +49,14 @@ private slots:
 
     void on_metallsAction_triggered();
 
+    void on_loseAction_triggered();
+
+    void on_AllData_triggered();
+
 private:
     Ui::MainWindow *ui;
+
+signals:
+    void sendInfo(Dialog::st temp);
 };
 #endif // MAINWINDOW_H

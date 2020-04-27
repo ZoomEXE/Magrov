@@ -1,4 +1,4 @@
-include(/root/xlsx/src/xlsx/qtxlsx.pri))
+include (C:\Qt\QtXlsxWriter-master\src\xlsx\qtxlsx.pri)
 
 QT       += core gui
 
@@ -19,13 +19,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    dialog.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    dialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

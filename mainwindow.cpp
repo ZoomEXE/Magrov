@@ -11,13 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
     QXlsx::Document z16("z16.xlsx");
     for(int i = 2;; ++i)
     {
-        for(int j = 1; j < 15; ++j)
+        for(int j = 1; j < 16; ++j)
         {
             z16.read(i, j);
         }
         if (QXlsx::Cell *cell = z16.cellAt(i, 1))
         {
-            st temp;
+            Dialog::st temp;
             temp.lokKod = z16.cellAt(i,1)->value().toString();
             temp.name = z16.cellAt(i,2)->value().toString();
             temp.index = z16.cellAt(i,3)->value().toString();
@@ -30,8 +30,22 @@ MainWindow::MainWindow(QWidget *parent)
             temp.argentum = z16.cellAt(i,10)->value().toDouble();
             temp.platina = z16.cellAt(i,11)->value().toDouble();
             temp.platinaGroup = z16.cellAt(i,12)->value().toDouble();
-            temp.lose = z16.cellAt(i,13)->value().toBool();
-            temp.metalls = z16.cellAt(i,14)->value().toBool();
+            if(z16.cellAt(i,13)->value().toString() == "Да")
+            {
+                temp.lose = true;
+                temp.osnovanie = z16.cellAt(i, 15)->value().toString();
+            }
+            else {
+                temp.lose = false;
+            }
+
+            if(z16.cellAt(i,14)->value().toString() == "Да")
+            {
+                temp.metalls = true;
+            }
+            else {
+                temp.metalls = false;
+            }
 
             data.push_back(temp);
         }
@@ -110,21 +124,81 @@ void MainWindow::on_vidVSAction_triggered()
     ui->statusbar->showMessage("Сортировка по виду вооруженных сил");
 }
 
+Dialog::st MainWindow::findLokKod(QString key)
+{
+    for(int i = 0; i < data.size();++i)
+    {
+        if(data[i].lokKod == key) {
+            return data[i];
+        }
+    }
+    QMessageBox::information(this, "Не найден", "Элемент с введенным локальным кодом не найден!");
+    Dialog::st temp;
+    temp.name = "Не найден";
+    return temp;
+}
+
+Dialog::st MainWindow::findName(QString key)
+{
+    for(int i = 0; i < data.size();++i)
+    {
+        if(data[i].name == key) {
+            return data[i];
+        }
+    }
+    QMessageBox::information(this, "Не найден", "Элемент с введенным наименованием не найден!");
+    Dialog::st temp;
+    temp.name = "Не найден";
+    return temp;
+}
+
+Dialog::st MainWindow::findIndex(QString key)
+{
+    for(int i = 0; i < data.size();++i)
+    {
+        if(data[i].index == key) {
+            return data[i];
+        }
+    }
+    QMessageBox::information(this, "Не найден", "Элемент с введенным чертежным индексом не найден!");
+    Dialog::st temp;
+    temp.name = "Не найден";
+    return temp;
+}
+
+//Нажатие кнопки Поиск
 void MainWindow::on_pushButton_clicked()
 {
+    Dialog *info = new Dialog();
+    connect(this, SIGNAL(sendInfo(Dialog::st)), info, SLOT(recieveInfo(Dialog::st)));
     if(ui->label->text() == "Введите локальный код")
     {
-
+        Dialog::st temp = findLokKod(ui->lineEdit->text());
+        if(temp.name != "Не найден")
+        {
+            emit sendInfo(temp);
+            info->show();
+        }
     }
 
     if(ui->label->text() == "Введите наименование")
     {
-
+        Dialog::st temp = findName(ui->lineEdit->text());
+        if(temp.name != "Не найден")
+        {
+            emit sendInfo(temp);
+            info->show();
+        }
     }
 
     if(ui->label->text() == "Введите чертежный индекс")
     {
-
+        Dialog::st temp = findIndex(ui->lineEdit->text());
+        if(temp.name != "Не найден")
+        {
+            emit sendInfo(temp);
+            info->show();
+        }
     }
 }
 
@@ -191,4 +265,50 @@ void MainWindow::on_metallsAction_triggered()
 
     ui->tableView->resizeRowsToContents();
     ui->tableView->resizeColumnsToContents();
+}
+
+void MainWindow::on_loseAction_triggered()
+{
+    loseModel = new QStandardItemModel;
+    QStandardItem *item = new QStandardItem;
+
+    //Заголовки столбцов
+    QStringList horizontalHeader;
+    horizontalHeader.append("Локальный код");
+    horizontalHeader.append("Наименование");
+    horizontalHeader.append("Чертежный индекс");
+    horizontalHeader.append("Основание");
+
+    loseModel->setHorizontalHeaderLabels(horizontalHeader);
+
+    //Заполнение таблицы
+    int ind = 0;
+    for(int i = 0; i < data.size(); ++i)
+    {
+        if(data[i].lose)
+        {
+            item = new QStandardItem(data[i].lokKod);
+            loseModel->setItem(ind, 0, item);
+
+            item = new QStandardItem(data[i].name);
+            loseModel->setItem(ind, 1, item);
+
+            item = new QStandardItem(data[i].index);
+            loseModel->setItem(ind, 2, item);
+
+            item = new QStandardItem(data[i].osnovanie);
+            loseModel->setItem(ind, 3, item);
+
+            ind++;
+        }
+    }
+    ui->tableView->setModel(loseModel);
+
+    ui->tableView->resizeRowsToContents();
+    ui->tableView->resizeColumnsToContents();
+}
+
+void MainWindow::on_AllData_triggered()
+{
+    fillTable();
 }
