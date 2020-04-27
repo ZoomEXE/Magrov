@@ -1,4 +1,6 @@
-QT       += core gui sql
+include(/root/xlsx/src/xlsx/qtxlsx.pri))
+
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
